@@ -15,7 +15,8 @@ require_once __DIR__."/../vendor/autoload.php";
 // echo "<pre>";
 use App\Controllers\HomeController;
 $router = new App\Router();
-$router -> register(strtolower($_SERVER['REQUEST_METHOD']), '/home', [HomeController::class, 'home'] );
+$router -> get('/home', [HomeController::class, 'home'] )
+        -> post('/home/sucsess', [HomeController::class, 'sucsess']);
 
 
 $router -> resolve(strtolower($_SERVER['REQUEST_METHOD']), $_SERVER['REQUEST_URI']);

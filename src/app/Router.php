@@ -9,14 +9,22 @@ use App\Controllers\HomeController;
 
 class Router{
     private array $routes;
-    public function register(string $requestMethod, string $route, callable|array $action):self{
+    public function register( string $routeMethod,string $route, callable|array $action):void{
 
-        $this->routes[$requestMethod][$route] = $action;
+        $this->routes[$routeMethod][$route] = $action;
        
         
+        
+    }
+    public function get(string $getRoute, callable|array $getAction){
+        $this->register('get',$getRoute,$getAction);
         return $this;
     }
-    // public function getRoute()
+
+    public function post(string $postRoute, callable|array $postAction){
+        $this->register('post',$postRoute,$postAction);
+        return $this;
+    }
     public function resolve($requestMethod, $requestUri) {
         $route = explode('?', $requestUri)[0];
         $action = $this->routes[$requestMethod][$route] ?? null;
