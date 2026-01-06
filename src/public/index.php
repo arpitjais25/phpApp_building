@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__."/../vendor/autoload.php";
-
+define('FILE_PATH', __DIR__ . '/../Storage');
 // $a = new App\testClass();
 
 // $id = new \Ramsey\Uuid\UuidFactory();
@@ -14,9 +14,13 @@ require_once __DIR__."/../vendor/autoload.php";
 
 // echo "<pre>";
 use App\Controllers\HomeController;
+use App\Controllers\FileController;
 $router = new App\Router();
 $router -> get('/home', [HomeController::class, 'home'] )
-        -> post('/home/sucsess', [HomeController::class, 'sucsess']);
+        -> post('/home/sucsess', [HomeController::class, 'sucsess'])
+        -> get('/home/upload', [FileController::class, 'upload_file'])
+        -> post('/home/upload', [FileController::class, 'upload_sucsessfull'])
+        -> post('/home/upload/display', [FileController::class, 'display_file']);
 
 
 $router -> resolve(strtolower($_SERVER['REQUEST_METHOD']), $_SERVER['REQUEST_URI']);
