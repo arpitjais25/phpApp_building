@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\View;
 use Ramsey\Uuid\Type\Integer;
 
 class FileController
 {
-    public function upload_file(): void
+    
+    public function upload_file(): string
     {
-        echo '<form action= "/home/upload" method="post" enctype="multipart/form-data">
-                    <label>Upload File</lable>
-                    <input type="file" name="upload_file"/>
-                    <input type="email" name="email" />
-                    <input type="submit"/>
-                </form>';
+        return View::make('File_Upload/File_upload');
     }
     public function upload_sucsessfull(): void
     {
@@ -28,18 +25,18 @@ class FileController
             echo "<hr>";
             print_r($_POST);
             move_uploaded_file($_FILES['upload_file']['tmp_name'], FILE_PATH . "/upload_file_" . $_FILES['upload_file']['name']);
-            $display =   "/../Storage/upload_file_" . $_FILES['upload_file']['name'];
+            $display =  "Storage/upload_file_" .$_FILES['upload_file']['name'];
             // sleep(30);
             echo <<<FORM
-                    <form id='file_submit' action='/home/upload/display' method='post'>
+                    <form  action='/home/upload/display' method='post'>
                     <input type='text' name='file_path' value='$display'>
                     <input type='submit' value='submit' >
                     </form>
-                    
-                FORM;
+
+            FORM;
             
             // echo '<script>
-            //         window.location.href="/home/upload/display";
+            //         window.location.href="/home/upload/sucsess";
             // </script>';
             
         } else {
@@ -52,11 +49,7 @@ class FileController
     // @display
     public function display_file()
     {
-        print_r($_POST);
-        $file_path = $_POST["file_path"];
-        echo '<div style="border: 2px solid black; height: 400px; width: 400px;">
-                 <img src="public/storage/upload_file_8b91147ed78b801218b4fa0c2ac9d9e7.jpg">
-                </div>';
+        return View::make('File_Upload/file-display', ['imagePath'=>$_POST]);
 
     }
 }

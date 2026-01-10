@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../vendor/autoload.php";
 define('FILE_PATH', __DIR__ . '/../Storage');
+define('VIEW_PATH', __DIR__ . '/../view');
 // $a = new App\testClass();
 
 // $id = new \Ramsey\Uuid\UuidFactory();
