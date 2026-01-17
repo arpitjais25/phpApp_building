@@ -18,10 +18,7 @@ use App\Controllers\HomeController;
 use App\Controllers\FileController;
 $router = new App\Router();
 $router -> get('/home', [HomeController::class, 'home'] )
-        -> post('/home/sucsess', [HomeController::class, 'sucsess'])
-        -> get('/home/upload', [FileController::class, 'upload_file'])
-        -> post('/home/upload', [FileController::class, 'upload_sucsessfull'])
-        -> post('/home/upload/display', [FileController::class, 'display_file']);
+        -> post('/home/sucsess', [HomeController::class, 'sucsess']);
 
 
 $router -> resolve(strtolower($_SERVER['REQUEST_METHOD']), $_SERVER['REQUEST_URI']);
