@@ -145,8 +145,8 @@ class HomeController{
         echo"</pre>";
     // Ab hu shikhenge namedParameter, placehoder indexing aur index paraneter 
 
-    $email2 = 'bob@gmail.com';
-    $full_name = 'bob';
+    $email2 = 'malik@gmail.com';
+    $full_name = 'malik';
     $isActive = 0;
     $created_at = date('Y-m-d H:m:i', strtotime('26-01-22 11:33AM'));
     // $stmt->execute([$email2,$full_name,$created_at,$isActive]);
@@ -184,3 +184,136 @@ class HomeController{
    
 }
 ?>
+<!-- 
+question--------ye batao ham bindvalue ya bindPrams ka use  q karte hai jabki hum execute 
+method se bhi to placeholder me value paas kar sql query chala sakte hai  
+
+    Bahut solid question hai 👍
+    Ye cheez samajh aa gayi to PDO proper level pe clear ho jata hai.
+
+    Main seedha point-to-point explain kar raha hoon 👇
+
+🔹 Pehle clear kar lein: 3 tarike hote hain
+1️⃣ execute() ke through value pass karna
+                                    $stmt = $pdo->prepare(
+                                        "SELECT * FROM users WHERE email = ?"
+                                    );
+                                    $stmt->execute([$email]);
+
+2️⃣ bindValue()
+                                    $stmt = $pdo->prepare(
+                                        "SELECT * FROM users WHERE email = ?"
+                                    );
+                                    $stmt->bindValue(1, $email);
+                                    $stmt->execute();
+
+3️⃣ bindParam()
+                                    $stmt = $pdo->prepare(
+                                        "SELECT * FROM users WHERE email = ?"
+                                    );
+                                    $stmt->bindParam(1, $email);
+                                    $stmt->execute();
+
+🔑 Core difference (THIS is the answer)
+🟢 execute() → value copy hoti hai
+------------------------------------
+
+Value execute ke time bind hoti hai
+
+Simple & best for 90% cases
+
+                                    $email = 'ram@gmail.com';
+                                    $stmt->execute([$email]);
+
+                                    $email = 'shyam@gmail.com'; // no effect
+
+🟡 bindValue() → value turant bind hoti hai
+----------------------------------------------
+
+Value bind karte waqt fix ho jati hai
+
+Baad me variable change ka effect nahi hota
+
+                                    $email = 'ram@gmail.com';
+                                    $stmt->bindValue(1, $email);
+
+                                    $email = 'shyam@gmail.com';
+                                    $stmt->execute(); // ram@gmail.com hi jayega
+
+🔴 bindParam() → variable ka reference bind hota hai
+
+Value execute ke time read hoti hai
+
+Variable change ka effect hota hai
+
+$email = 'ram@gmail.com';
+$stmt->bindParam(1, $email);
+
+$email = 'shyam@gmail.com';
+$stmt->execute(); // shyam@gmail.com jayega
+
+🤔 Phir sawal: jab execute hai to bind kyu?
+✅ execute() best hai jab:
+
+Single execution
+
+Simple query
+
+Clean readable code
+
+✔ Recommended for most cases
+
+✅ bindValue() useful jab:
+
+Type explicitly set karna ho
+
+Same query ko multiple times execute nahi karna
+
+$stmt->bindValue(1, 10, PDO::PARAM_INT);
+
+✅ bindParam() ka real use-case
+
+Same prepared query ko loop me multiple times chalana
+
+$stmt = $pdo->prepare(
+    "INSERT INTO logs (email) VALUES (?)"
+);
+
+$stmt->bindParam(1, $email);
+
+foreach ($emails as $email) {
+    $stmt->execute();
+}
+
+
+➡️ Yahan execute([$email]) har baar likhna avoid hota hai
+
+🧠 Performance angle (important)
+
+Prepare once
+
+Bind once
+
+Execute multiple times
+
+➡️ bindParam() efficient hota hai bulk operations me
+
+🧾 Summary table
+Method	Binding kab hoti	Variable change ka effect
+execute()	execute ke time	❌
+bindValue()	bind ke time	❌
+bindParam()	execute ke time	✅
+🔥 Final verdict (yaad rakhna)
+
+Daily CRUD ke liye: execute([$data])
+Bulk / loop insert ke liye: bindParam()
+Explicit type chahiye: bindValue()
+
+Agar chaho to next:
+
+named vs positional placeholders
+
+real SQL injection edge cases
+
+PDO vs MySQLi difference 
+-->
