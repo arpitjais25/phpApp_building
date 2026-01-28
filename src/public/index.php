@@ -15,9 +15,10 @@ define('VIEW_PATH', __DIR__ . '/../view');
 
 // echo "<pre>";
 use App\Controllers\HomeController;
-use App\Controllers\FileController;
+use App\Controllers\InvoiceController;
 $router = new App\Router();
-$router -> get('/home', [HomeController::class, 'home'] );
+$router -> get('/home', [HomeController::class, 'home'] )
+        -> get('/', [InvoiceController::class, 'index'] );
 
 
 $router -> resolve(strtolower($_SERVER['REQUEST_METHOD']), $_SERVER['REQUEST_URI']);

@@ -1,2 +1,4 @@
 src/vendor/
 Docker/storage
+.env
+.vscode

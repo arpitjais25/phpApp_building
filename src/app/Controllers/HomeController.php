@@ -316,4 +316,5 @@ named vs positional placeholders
 real SQL injection edge cases
 
 PDO vs MySQLi difference 
+https://youtu.be/SSKVgrwhzus?si=dlQDFdaOVpJT7tcj
 -->
