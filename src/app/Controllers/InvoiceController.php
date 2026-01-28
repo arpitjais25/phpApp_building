@@ -6,8 +6,11 @@ use PDO;
 
 class InvoiceController{
     public function index(){
+
+    var_dump($_ENV['DB_HOST']);
+        
         try{
-            $db = new \PDO('mysql:host=db;dbname=my_db', 'root','root',[
+            $db = new \PDO('mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_DATABASE'], $_ENV['DB_USER'],$_ENV['DB_PASSWORD'],[
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]);
