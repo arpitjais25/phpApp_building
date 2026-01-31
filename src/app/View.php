@@ -19,7 +19,7 @@ class View
 
         return $this->render();
     }
-    public function render()
+    public function render()//1
     {
         $path = VIEW_PATH . DIRECTORY_SEPARATOR . $this->view . '.php';
 

@@ -16,12 +16,12 @@ class Router{
         
         
     }
-    public function get(string $getRoute, callable|array $getAction){
+    public function get(string $getRoute, callable|array $getAction):Router{
         $this->register('get',$getRoute,$getAction);
         return $this;
     }
 
-    public function post(string $postRoute, callable|array $postAction){
+    public function post(string $postRoute, callable|array $postAction):Router{
         $this->register('post',$postRoute,$postAction);
         return $this;
     }

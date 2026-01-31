@@ -2,12 +2,13 @@
 declare(strict_types = 1);
 namespace App\Controllers;
 
+use App\View;
 use PDO;
 
 class InvoiceController{
     public function index(){
 
-    var_dump($_ENV['DB_HOST']);
+    // var_dump($_ENV['DB_HOST']);
         
         try{
             $db = new \PDO('mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_DATABASE'], $_ENV['DB_USER'],$_ENV['DB_PASSWORD'],[
@@ -59,10 +60,12 @@ class InvoiceController{
                                         users ON user_id = users.id ');
 
     $userInvoiceData->execute();
-    foreach($userInvoiceData->fetchAll() as $data){
-            echo "<pre>";
-            var_dump($data);
+    // foreach($userInvoiceData->fetchAll() as $data){
+    //         echo "<pre>";
+    //         var_dump($data);
+    // }
+    return View::make('invoice', ['invoice'=>$userInvoiceData->fetchAll()]);
     }
-    }
+    
 
 }
