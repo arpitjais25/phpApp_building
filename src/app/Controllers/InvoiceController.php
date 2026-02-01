@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace App\Controllers;
 
+use App\App;
 use App\View;
 use PDO;
 
@@ -10,18 +11,9 @@ class InvoiceController{
 
     // var_dump($_ENV['DB_HOST']);
         
-        try{
-            $db = new \PDO('mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_DATABASE'], $_ENV['DB_USER'],$_ENV['DB_PASSWORD'],[
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ]);
-            // var_dump($db);
-        }
-        catch(\PDOException $e){
-           echo $e->getMessage()." ".$e->getCode().$e->getLine();       
-        }
-        // $email = 'chalmpa@bmw.com'; 
-        // $full_name = 'champa';
+        $db = App::db();
+        // $email = 'Raghav@bmw.com'; 
+        // $full_name = 'Raghav';
         // try{
         //     $db->beginTransaction();
         //     $newUserStmt = $db->prepare('INSERT INTO users (email, full_name, created_at, is_active) VALUES (?,?,NOW(),1)');
@@ -29,7 +21,7 @@ class InvoiceController{
         //     $newUserStmt->execute([$email, $full_name]);
         //     $user_id = $db->lastInsertId();
         //     // echo $user_id;
-        //     $newUserInvoiceStmt->execute([100, $user_id]);
+        //     $newUserInvoiceStmt->execute([1256.00, $user_id]);
         //     $db->commit();
         // }
         // catch(\Throwable $e){
@@ -56,8 +48,9 @@ class InvoiceController{
 
     // NOW PRINTING DATA----
 
-    $userInvoiceData = $db->prepare('SELECT invoise.id AS invoice_id, user_id,amount, full_name FROM invoise INNER JOIN 
-                                        users ON user_id = users.id ');
+    $userInvoiceData = $db->prepare('SELECT invoise.id AS invoice_id, user_id,amount, full_name 
+                                        FROM invoise 
+                                        INNER JOIN users ON user_id = users.id ');
 
     $userInvoiceData->execute();
     // foreach($userInvoiceData->fetchAll() as $data){
