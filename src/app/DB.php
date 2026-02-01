@@ -22,6 +22,6 @@ class DB{
         catch(\PDOException $e){
            echo $e->getMessage()." ".$e->getCode().$e->getLine();       
         }
-        // return $this->pdo;
+        // return $this->pdo ;
     }
 }
