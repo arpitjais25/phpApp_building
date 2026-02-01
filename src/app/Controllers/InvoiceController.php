@@ -12,8 +12,14 @@ class InvoiceController{
     // var_dump($_ENV['DB_HOST']);
         
         $db = App::db();
-        // $email = 'Raghav@bmw.com'; 
-        // $full_name = 'Raghav';
+        // $db1 = App::db();
+        // $db2 = App::db();
+        // var_dump($db === $db1, $db1 === $db2, $db2===$db);
+        // output - bool(true) bool(true) bool(true)  prove hai ki ek hi instance banega
+        exit;
+                    // var_dump($db->inTransaction());
+        // $email = 'didi@gmail.com'; 
+        // $full_name = 'didi';
         // try{
         //     $db->beginTransaction();
         //     $newUserStmt = $db->prepare('INSERT INTO users (email, full_name, created_at, is_active) VALUES (?,?,NOW(),1)');
@@ -25,7 +31,9 @@ class InvoiceController{
         //     $db->commit();
         // }
         // catch(\Throwable $e){
+        //     // var_dump($db->inTransaction());
         //     if($db->inTransaction()){
+                
         //         $db->rollBack();
         //     }
         //     throw $e;

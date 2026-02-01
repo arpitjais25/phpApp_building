@@ -26,6 +26,7 @@ use App\App;
 use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
 use App\Router;
+use App\Config;
 
 $router = new Router();
 $router -> get('/home', [HomeController::class, 'home'] )
@@ -38,11 +39,5 @@ $router -> get('/home', [HomeController::class, 'home'] )
         'method'        =>$_SERVER['REQUEST_METHOD']
 
         
-],[
-        'host'          => $_ENV['DB_HOST'],
-        'driver'        => $_ENV['DB_DRIVER']??'mysql',
-        'user'          => $_ENV['DB_USER'],
-        'password'      => $_ENV['DB_PASSWORD'],
-        'db_database'   => $_ENV['DB_DATABASE']
-]
+],(new Config($_ENV))
 ))->run();

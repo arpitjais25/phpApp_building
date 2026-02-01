@@ -7,6 +7,7 @@ use PDO;
 
 class HomeController{
     public function home(){
+        
 
     //sql injuction query-> http://localhost:8000/home?email=arpit@gmail.com%22+OR+1=1+--+
         

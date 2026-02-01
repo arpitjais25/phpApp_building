@@ -9,14 +9,14 @@ class App{
     public function __construct(
         protected Router $router,
         protected array $request,
-        protected array $config
+        protected Config $config
     )
     {
-       static::$db = new DB($config);
+       static::$db = new DB($config->db) ?? [];
     }
     
     public static function db():DB{
-        var_dump(static::$db);
+        // var_dump(static::$db);
         return static::$db;
     }
 
