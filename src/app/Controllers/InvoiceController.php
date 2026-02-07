@@ -13,8 +13,8 @@ use App\View;
 class InvoiceController{
     public function index(){
        
-        $email = 'sunny@gmail.com'; 
-        $full_name = 'sunny';
+        $email = 'sunnydadda@gmail.com'; 
+        $full_name = 'sunnydadda';
         $amount = 58846;
 
         $userModel = new User();

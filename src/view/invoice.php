@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <table style="border:2px solid black; width:500px"  >
+    <table style="display:flex;align-item:center"  >
         <thead><h1>User-Invoice</h1></thead>
         <tbody>
             
-                <tr style="color: white;background-color: aqua;">
+                <tr style="color: white;background-color: aqua;font-size:xx-large">
                     <td>Invoice Id</td>
                     <td>Amount</td>
                     <td>Full Name</td>
@@ -18,7 +18,7 @@
             
             
                 <?php foreach($invoice as $invc):?>
-                    <tr>
+                    <tr style="font-size: x-large;">
                         <td style="color:aqua;"> <?= $invc['invoice_id'] ?></td>
                         <td style="color:green"> <?= $invc['amount'] ?></td>
                         <td style="color:red"> <?= $invc['full_name'] ?></td>
