@@ -5,10 +5,11 @@ declare(strict_types = 1);
 
 namespace App;
 
-use App\Controllers\HomeController;
+
+use App\Exception\RouteNotFoundException;
 
 class Router{
-    private array $routes;
+    private array $routes = [];
     public function register( string $routeMethod,string $route, callable|array $action):void{
 
         $this->routes[$routeMethod][$route] = $action;
@@ -25,11 +26,14 @@ class Router{
         $this->register('post',$postRoute,$postAction);
         return $this;
     }
+    public function routes(){
+        return $this->routes;
+    }
     public function resolve($requestMethod, $requestUri) {
         $route = explode('?', $requestUri)[0];
         $action = $this->routes[$requestMethod][$route] ?? null;
         if(!$action){
-            throw new \Exception($action."galat hai");
+            throw new RouteNotFoundException();
         }
         if (is_callable($action)) {
 
@@ -39,12 +43,19 @@ class Router{
             
             [$class , $method] = $action;
 
-
-            $route_class_instanc = new $class ();
+            if(class_exists($class)){
+                $route_class_instanc = new $class ();
            
-            return call_user_func([$route_class_instanc, $method], [0]);
+                if(method_exists($route_class_instanc, $method)){
+                    return call_user_func([$route_class_instanc, $method], [0]);
 
-            
+                }
+            }
+                 
         }
+        // throw new Exception\RouteNotFoundException();
+        throw new RouteNotFoundException();
     }
+    
+    
 }
