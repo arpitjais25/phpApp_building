@@ -24,31 +24,31 @@ class App
         protected Config $config
     ) {
         static::$db = new DB($config->db) ?? [];
-        static::$container = new Container();
-        // var_dump(static::$container);
-        // echo"<hr>";
-        // var_dump(InvoiceService::class);
-        // echo"<hr>";
-        static::$container->set(
-            InvoiceService::class,
-            static function (Container $c) {/**closuer ki ek property hoti hai ki vo apni class ke $this se bind ho 
-            jata hai    lekin ahar tum clouser ko static bana do to vah ye nahi kar paat */
-                var_dump($c);
-                echo"<hr>";
-                return new InvoiceService(
-                    $c->get(SelesTaxService::class),
-                    $c->get(PaymentGetewayService::class),
-                    $c->get(EmailService::class)
+        // static::$container = new Container();
+        // // var_dump(static::$container);
+        // // echo"<hr>";
+        // // var_dump(InvoiceService::class);
+        // // echo"<hr>";
+        // static::$container->set(
+        //     InvoiceService::class,
+        //     static function (Container $c) {/**closuer ki ek property hoti hai ki vo apni class ke $this se bind ho 
+        //     jata hai    lekin ahar tum clouser ko static bana do to vah ye nahi kar paat */
+        //         var_dump($c);
+        //         echo"<hr>";
+        //         return new InvoiceService(
+        //             $c->get(SelesTaxService::class),
+        //             $c->get(PaymentGetewayService::class),
+        //             $c->get(EmailService::class)
                    
-                );
-            }
-        );
+        //         );
+        //     }
+        // );
 
-        static::$container->set(SelesTaxService::class, fn()=>new SelesTaxService()/**yaha per callback function
-        ki madat se ham dependency ka object set karte hai */);
-        static::$container->set(EmailService::class, fn()=>new EmailService());
-        static::$container->set(PaymentGetewayService::class, fn()=>new PaymentGetewayService());
-        // var_dump(static::$container);
+        // static::$container->set(SelesTaxService::class, fn()=>new SelesTaxService()/**yaha per callback function
+        // ki madat se ham dependency ka object set karte hai */);
+        // static::$container->set(EmailService::class, fn()=>new EmailService());
+        // static::$container->set(PaymentGetewayService::class, fn()=>new PaymentGetewayService());
+        // // var_dump(static::$container);
     }
 
     public static function db(): DB

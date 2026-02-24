@@ -1,17 +1,23 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace App\Controllers;
 
 use App\App;
+use App\Container;
 use App\Services\InvoiceService;
 use App\View;
 
-class ContainerController{
-    public function index(){
+class ContainerController
+{
+
+    public function __construct(private InvoiceService $invoiceService) {}
+    public function index()
+    {
         echo "<pre>";
-        
-        App::$container -> get(InvoiceService::class)->process([],67);
+
+        $this->invoiceService->process([], 23);
         return View::make('index');
     }
 }
-?>

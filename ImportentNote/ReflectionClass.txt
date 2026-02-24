@@ -1,0 +1,18 @@
+Reflection = runtime pe class ki information nikalna.
+
+Matlab:
+
+Program chal raha hai…
+aur tum code se hi kisi class ko inspect kar lo:
+
+constructor kya hai
+
+kitne parameters hain
+
+methods kaun kaun se hain
+
+properties kya hain
+
+type hints kya hain
+
+Ye sab Reflection se possible hai.

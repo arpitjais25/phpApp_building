@@ -1,0 +1,26 @@
+Reflection API kya hai?
+
+Reflection API = PHP ka built-in toolset jo runtime pe classes, methods, properties, functions ko inspect karne deta hai.
+
+Matlab program chal raha ho…
+aur tum code ke through hi code ke baare me information nikaal lo.
+
+Ye hi Reflection API hai.
+
+🎯 “API” word kyu?
+
+Kyuki PHP kuch special classes provide karta hai:
+
+ReflectionClass
+
+ReflectionMethod
+
+ReflectionProperty
+
+ReflectionFunction
+
+ReflectionParameter
+
+etc.
+
+In sab ka group hi Reflection API kehlata hai.

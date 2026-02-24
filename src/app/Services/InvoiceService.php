@@ -3,9 +3,10 @@ declare(strict_types = 1);
 namespace App\Services;
 class InvoiceService{
     public function __construct(
-        protected $selesTaxService    = new SelesTaxService(),
-        protected $getewayService     = new PaymentGetewayService(),
-        protected $emailService       = new EmailService()
+        
+        protected PaymentGetewayService $getewayService,
+        protected SelesTaxService $selesTaxService,
+        protected EmailService $emailService
     ){}
     
     public function process( array $customer, float $amount):bool
@@ -23,6 +24,8 @@ class InvoiceService{
 
         // 3.   send receipt
         $this ->emailService->send($customer, 'receipt');
+
+        echo '<h1>Invoice is completed!!</h1>';
 
         return true;
     }

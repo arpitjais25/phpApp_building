@@ -31,10 +31,10 @@ use App\Container;
 use App\Services\InvoiceService;
 use App\Controllers\ContainerController;
 
-$router = new Router();
-$router -> get('/home', [HomeController::class, 'home'] )
-        -> get('/', [ContainerController::class, 'index'] )
-        ->get('/invoice',[InvoiceService::class, 'process']);
+$container = new \App\Container;
+$router = new Router($container);
+$router 
+        -> get('/', [ContainerController::class, 'index'] );
 
 
 
