@@ -27,11 +27,13 @@ use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
 use App\Router;
 use App\Config;
+use App\Container;
 use App\Services\InvoiceService;
+use App\Controllers\ContainerController;
 
 $router = new Router();
 $router -> get('/home', [HomeController::class, 'home'] )
-        -> get('/', [InvoiceController::class, 'index'] )
+        -> get('/', [ContainerController::class, 'index'] )
         ->get('/invoice',[InvoiceService::class, 'process']);
 
 

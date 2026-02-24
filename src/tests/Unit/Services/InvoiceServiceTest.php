@@ -64,10 +64,7 @@ class InvoiceServiceTest extends TestCase{
             $emailServiceMock
         );
        
-        
-
-       
-    //  when process is called
+        //  when process is called
         
         $amount = 150;
        $result =  $invoiceServices -> process($customer, $amount);

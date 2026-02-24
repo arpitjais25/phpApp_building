@@ -1,0 +1,15 @@
+Agar closure class ke andar define hota hai:
+
+        class App {
+            public function __construct() {
+                $fn = function() {
+                    var_dump($this);
+                };
+            }
+        }
+
+To closure automatically $this ko access kar sakta hai.
+
+IMP---
+    closuer ki ek property hoti hai ki vo apni class ke $this se bind ho 
+    jata hai    lekin ahar tum clouser ko static bana do to vah ye nahi kar paat
